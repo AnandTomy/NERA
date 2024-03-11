@@ -4,8 +4,8 @@ class SquarePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue
-      ..strokeWidth = 2
+      ..color = Colors.black45
+      ..strokeWidth = 3
       ..style = PaintingStyle.stroke;
 
     final double halfWidth = size.width / 2;

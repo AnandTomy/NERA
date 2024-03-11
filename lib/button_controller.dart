@@ -183,10 +183,10 @@ class ButtonController extends GetxController {
     }
     if (winner == 'red') {
       redScore++;
-      Get.snackbar('Red Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('Red Wins', 'message',snackPosition: SnackPosition.BOTTOM);
     } else if (winner == 'blue') {
       blueScore++;
-      Get.snackbar('blue Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('blue Wins', 'message',snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -216,7 +216,7 @@ class ButtonController extends GetxController {
     }
   }
 
-  String updateCoin(Offset offset, String pos) {
+  Future<String> updateCoin(Offset offset, String pos) async{
     setPos(lastSelectedPos, 'z');
 
     switch (id) {
@@ -247,6 +247,7 @@ class ButtonController extends GetxController {
         setPos(pos, 'b');
     }
     checkInLine();
+    await Future.delayed(Duration(milliseconds: 800));
     return winner;
   }
 }

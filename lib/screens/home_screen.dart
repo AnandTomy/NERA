@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nera2/screens/rules_screen.dart';
 
 import 'game_screen.dart';
 
@@ -8,47 +10,90 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Game'),
-        centerTitle: true,
-      ),
-      body: Center(
+      backgroundColor: Color.fromARGB(242, 177, 207, 231),
+      body: SizedBox(
+        width: size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FlutterLogo(),
-            SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GameScreen(size: size,)),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  'Start Game',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {
-               Get.to(GameScreen(size: size),curve: ElasticInOutCurve() );
-              },
+            Expanded(
+                child: Center(
               child: Text(
-                'Rules',
-                style: TextStyle(fontSize: 16, color: Colors.blue),
+                'NERA',
+                style: GoogleFonts.exo2(
+                  color: const Color.fromARGB(255, 59, 59, 61),
+                  fontSize: 100,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: SizedBox(
+                width: size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => GameScreen(
+                                size: size,
+                              )),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    child: Text(
+                      'PLAY',
+                      style: GoogleFonts.exo2(
+                        color: const Color.fromARGB(255, 59, 59, 61),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              child: SizedBox(
+                width: size.width,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RulesScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    child: Text(
+                      'RULES',
+                      style: GoogleFonts.exo2(
+                        color: const Color.fromARGB(255, 59, 59, 61),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 80,)
           ],
         ),
       ),
