@@ -67,6 +67,11 @@ class ButtonController extends GetxController {
   set isTurn(bool value) {
     _isTurn.value = value;
   }
+
+  void resetScores(){
+    redScore = 0;
+    blueScore = 0;
+  }
   int id = 0;
   Offset selectedButtonOffset = Offset(0, 0);
 

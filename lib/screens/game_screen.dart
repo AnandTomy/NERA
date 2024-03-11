@@ -92,6 +92,7 @@ class _GameScreenState extends State<GameScreen> {
                           children: [
                             IconButton(onPressed: (){
                               Get.offAll(HomeScreen());
+                              buttonController.resetScores();
                             }, icon: Icon(Icons.home_rounded,size: 30,)),
                             IconButton(onPressed: (){
                               resetGame();
