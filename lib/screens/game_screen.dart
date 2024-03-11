@@ -38,13 +38,13 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   void initState() {
-    redInitPos = Offset(size.width / 2, size.height / 4 - 150);
-    redInitPos1 = Offset(size.width / 2.7, size.height / 4 - 150);
-    redInitPos2 = Offset(size.width / 4, size.height / 4 - 150);
+    redInitPos = Offset(size.width / 2 -60-16, size.height / 2 - 200 -32 );
+    redInitPos1 = Offset(size.width / 2 -16, size.height / 2 -200-32 );
+    redInitPos2 = Offset(size.width / 2 +60-16, size.height / 2  -200-32);
 
-    blueInitPos = Offset(size.width / 2, size.height - 150);
-    blueInitPos1 = Offset(size.width / 2.7, size.height - 150);
-    blueInitPos2 = Offset(size.width / 4, size.height - 150);
+    blueInitPos = Offset(size.width / 2 - 60-16, size.height/2+200);
+    blueInitPos1 = Offset(size.width / 2-16, size.height/2+200);
+    blueInitPos2 = Offset(size.width / 2 + 60-16, size.height/2+200);
 
     topLeft = Offset(size.width / 2 - 150 - 16, size.height / 2 - 150 - 16);
     top = Offset(size.width / 2 - 16, size.height / 2 - 150 - 16);
@@ -68,63 +68,119 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Text('reset'),
-        onPressed: () {
-          resetGame();
-        },
-      ),
-      backgroundColor: Color(0xF28AF1AA),
-      body: Center(
-        child: Obx(
-          () => Stack(
-            children: [
-              Center(
-                child: CustomPaint(
-                  size: Size(300, 300), // Size of the square
-                  painter: SquarePainter(),
+    return Obx(
+        ()=> Scaffold(
+        // floatingActionButton: FloatingActionButton(
+        //   child: Text('reset'),
+        //   onPressed: () {
+        //     resetGame();
+        //   },
+        // ),
+        backgroundColor: buttonController.isTurn?Color(0xF2EABDBD):Color(0xF2B1CFE7),
+        body: Center(
+          child:  Stack(
+              children: [
+                Positioned(
+                  bottom: 20,
+                    child:SizedBox(
+                      width: widget.size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 10),
+                        child: Row(
+
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(onPressed: (){
+                              Get.offAll(HomeScreen());
+                            }, icon: Icon(Icons.home_rounded,size: 30,)),
+                            IconButton(onPressed: (){
+                              resetGame();
+                            }, icon: Icon(Icons.restart_alt_rounded,size: 30,))
+                          ],
+                        ),
+                      ),
+                    )),
+                SafeArea(
+                  child: SizedBox(
+                    width: widget.size.width,
+                    child: Column(
+
+                      children: [
+                        Text("SCORE",
+                          style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(children: [
+                              Text('RED',style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold
+                        ),),
+                              Text(buttonController.redScore.toString())
+                            ],),
+                            Column(children: [
+                              Text('BLUE',style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold
+                            ),),
+                              Text(buttonController.blueScore.toString())
+                            ],)
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-              ...invButtons(),
-              Coin(
-                  offset: buttonController.selectedOff_1.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(1, 'r', buttonController.selectedOff_1.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_2.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(2, 'r', buttonController.selectedOff_2.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_3.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(3, 'r', buttonController.selectedOff_3.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_4.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(4, 'b', buttonController.selectedOff_4.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_5.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(5, 'b', buttonController.selectedOff_5.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_6.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(6, 'b', buttonController.selectedOff_6.value);
-                  }),
-            ],
-          ),
+                Center(
+                  child: CustomPaint(
+                    size: Size(300, 300), // Size of the square
+                    painter: SquarePainter(),
+                  ),
+                ),
+                ...invButtons(),
+                Coin(
+                    offset: buttonController.selectedOff_1.value,
+                    player: false,
+                    onTap: () {
+                      onButtonTap(1, 'r', buttonController.selectedOff_1.value);
+                    }),
+                Coin(
+                    offset: buttonController.selectedOff_2.value,
+                    player: false,
+                    onTap: () {
+                      onButtonTap(2, 'r', buttonController.selectedOff_2.value);
+                    }),
+                Coin(
+                    offset: buttonController.selectedOff_3.value,
+                    player: false,
+                    onTap: () {
+                      onButtonTap(3, 'r', buttonController.selectedOff_3.value);
+                    }),
+                Coin(
+                    offset: buttonController.selectedOff_4.value,
+                    player: true,
+                    onTap: () {
+                      onButtonTap(4, 'b', buttonController.selectedOff_4.value);
+                    }),
+                Coin(
+                    offset: buttonController.selectedOff_5.value,
+                    player: true,
+                    onTap: () {
+                      onButtonTap(5, 'b', buttonController.selectedOff_5.value);
+                    }),
+                Coin(
+                    offset: buttonController.selectedOff_6.value,
+                    player: true,
+                    onTap: () {
+                      onButtonTap(6, 'b', buttonController.selectedOff_6.value);
+                    }),
+              ],
+            ),
+
         ),
       ),
     );

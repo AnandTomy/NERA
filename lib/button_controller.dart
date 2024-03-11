@@ -3,6 +3,25 @@ import 'package:get/get.dart';
 
 class ButtonController extends GetxController {
 
+  Rx<int> _redScore = 0.obs;
+
+
+  int get redScore => _redScore.value;
+
+  set redScore(int value) {
+    _redScore.value = value;
+  }
+  Rx<int> _blueScore = 0.obs;
+
+  int get blueScore => _blueScore.value;
+
+  set blueScore(int value) {
+    _blueScore.value = value;
+
+  }
+
+
+
   Rx<bool> vis1 = false.obs;
   Rx<bool> vis2 = false.obs;
   Rx<bool> vis3 = false.obs;
@@ -41,8 +60,13 @@ class ButtonController extends GetxController {
   // }
 
   String winner = '';
+  Rx<bool> _isTurn = false.obs;
 
-  bool isTurn = false;
+  bool get isTurn => _isTurn.value;
+
+  set isTurn(bool value) {
+    _isTurn.value = value;
+  }
   int id = 0;
   Offset selectedButtonOffset = Offset(0, 0);
 
@@ -153,9 +177,11 @@ class ButtonController extends GetxController {
       winner = 'blue';
     }
     if (winner == 'red') {
-      Get.snackbar('Red Wins', 'message');
+      redScore++;
+      Get.snackbar('Red Wins', 'message',snackPosition: SnackPosition.BOTTOM);
     } else if (winner == 'blue') {
-      Get.snackbar('blue Wins', 'message');
+      blueScore++;
+      Get.snackbar('blue Wins', 'message',snackPosition: SnackPosition.BOTTOM);
     }
   }
 

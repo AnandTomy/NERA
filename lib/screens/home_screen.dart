@@ -16,10 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/game_logo.png', // Replace with your game logo image
-              width: 200,
-            ),
+            FlutterLogo(),
             SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
