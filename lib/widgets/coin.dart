@@ -19,6 +19,11 @@ class Coin extends StatelessWidget {
           width: 32, // Adjust size as needed
           height: 32, // Adjust size as needed
           decoration: BoxDecoration(
+            // border: Border.all(
+            //   color: isSelected?Colors.green:Colors.transparent,
+            //   width:3
+            //
+            // ),
             shape: BoxShape.circle,
             color: player ? Color(0xFF0E3F7A) : Color(0xFFB61515),
           ),

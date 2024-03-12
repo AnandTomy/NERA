@@ -70,154 +70,158 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   child: Text('reset'),
-        //   onPressed: () {
-        //     resetGame();
-        //   },
-        // ),
-        backgroundColor: buttonController.isTurn ? Color(0xF2EABDBD) : Color(0xF2B1CFE7),
-        body: Center(
-          child: Stack(
-            children: [
-              Positioned(
-                  bottom: 20,
-                  child: SizedBox(
-                    width: widget.size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      () =>
+          Scaffold(
+            // floatingActionButton: FloatingActionButton(
+            //   child: Text('reset'),
+            //   onPressed: () {
+            //     resetGame();
+            //   },
+            // ),
+            backgroundColor: buttonController.isTurn ? Color(0xF2EABDBD) : Color(0xF2B1CFE7),
+            body: Center(
+              child: Stack(
+                children: [
+                  Positioned(
+                      bottom: 20,
+                      child: SizedBox(
+                        width: widget.size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    Get.offAll(HomeScreen());
+                                    buttonController.resetScores();
+                                  },
+                                  icon: Icon(
+                                    Icons.home_rounded,
+                                    size: 30,
+                                  )),
+                              IconButton(
+                                  onPressed: () {
+                                    resetGame();
+                                    buttonController.resetScores();
+                                  },
+                                  icon: Icon(
+                                    Icons.restart_alt_rounded,
+                                    size: 30,
+                                  ))
+                            ],
+                          ),
+                        ),
+                      )),
+                  SafeArea(
+                    child: SizedBox(
+                      width: widget.size.width,
+                      child: Column(
                         children: [
-                          IconButton(
-                              onPressed: () {
-                                Get.offAll(HomeScreen());
-                                buttonController.resetScores();
-                              },
-                              icon: Icon(
-                                Icons.home_rounded,
-                                size: 30,
-                              )),
-                          IconButton(
-                              onPressed: () {
-                                resetGame();
-                              },
-                              icon: Icon(
-                                Icons.restart_alt_rounded,
-                                size: 30,
-                              ))
+                          Text(
+                            "SCORE",
+                            style: GoogleFonts.exo2(
+                              color: const Color.fromARGB(255, 59, 59, 61),
+                              fontSize: 40,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'RED',
+                                    style: GoogleFonts.exo2(
+                                      color: const Color.fromARGB(255, 59, 59, 61),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                  Text(buttonController.redScore.toString(),
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: const Color.fromARGB(255, 59, 59, 61),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w900,
+                                    ),)
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'BLUE',
+                                    style: GoogleFonts.exo2(
+                                      color: const Color.fromARGB(255, 59, 59, 61),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                  Text(
+                                    buttonController.blueScore.toString(),
+                                    style: GoogleFonts.sairaCondensed(
+                                      color: const Color.fromARGB(255, 59, 59, 61),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  )),
-              SafeArea(
-                child: SizedBox(
-                  width: widget.size.width,
-                  child: Column(
-                    children: [
-                      Text(
-                        "SCORE",
-                        style: GoogleFonts.exo2(
-                          color: const Color.fromARGB(255, 59, 59, 61),
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                'RED',
-                                style: GoogleFonts.exo2(
-                                  color: const Color.fromARGB(255, 59, 59, 61),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              Text(buttonController.redScore.toString(),
-                                style: GoogleFonts.sairaCondensed(
-                                  color: const Color.fromARGB(255, 59, 59, 61),
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w900,
-                                ),)
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                'BLUE',
-                                style: GoogleFonts.exo2(
-                                  color: const Color.fromARGB(255, 59, 59, 61),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              Text(
-                                buttonController.blueScore.toString(),
-                                style: GoogleFonts.sairaCondensed(
-                                  color: const Color.fromARGB(255, 59, 59, 61),
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
                   ),
-                ),
+                  Center(
+                    child: CustomPaint(
+                      size: Size(300, 300), // Size of the square
+                      painter: SquarePainter(),
+                    ),
+                  ),
+                  ...invButtons(),
+                  Coin(
+                      offset: buttonController.selectedOff_1.value,
+                      player: false,
+                      onTap: () {
+                        onButtonTap(1, 'r', buttonController.selectedOff_1.value);
+                      }),
+                  Coin(
+                      offset: buttonController.selectedOff_2.value,
+                      player: false,
+                      onTap: () {
+                        onButtonTap(2, 'r', buttonController.selectedOff_2.value);
+                      }),
+                  Coin(
+                      offset: buttonController.selectedOff_3.value,
+                      player: false,
+                      onTap: () {
+                        onButtonTap(3, 'r', buttonController.selectedOff_3.value);
+                      }),
+                  Coin(
+                      offset: buttonController.selectedOff_4.value,
+                      player: true,
+                      onTap: () {
+                        onButtonTap(4, 'b', buttonController.selectedOff_4.value);
+                      }),
+                  Coin(
+                      offset: buttonController.selectedOff_5.value,
+                      player: true,
+                      onTap: () {
+                        onButtonTap(5, 'b', buttonController.selectedOff_5.value);
+                      }),
+                  Coin(
+                      offset: buttonController.selectedOff_6.value,
+                      player: true,
+                      onTap: () {
+                        onButtonTap(6, 'b', buttonController.selectedOff_6.value);
+                      }),
+                ],
               ),
-              Center(
-                child: CustomPaint(
-                  size: Size(300, 300), // Size of the square
-                  painter: SquarePainter(),
-                ),
-              ),
-              ...invButtons(),
-              Coin(
-                  offset: buttonController.selectedOff_1.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(1, 'r', buttonController.selectedOff_1.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_2.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(2, 'r', buttonController.selectedOff_2.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_3.value,
-                  player: false,
-                  onTap: () {
-                    onButtonTap(3, 'r', buttonController.selectedOff_3.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_4.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(4, 'b', buttonController.selectedOff_4.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_5.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(5, 'b', buttonController.selectedOff_5.value);
-                  }),
-              Coin(
-                  offset: buttonController.selectedOff_6.value,
-                  player: true,
-                  onTap: () {
-                    onButtonTap(6, 'b', buttonController.selectedOff_6.value);
-                  }),
-            ],
+            ),
           ),
-        ),
-      ),
+
+
     );
   }
 
@@ -367,11 +371,61 @@ class _GameScreenState extends State<GameScreen> {
     buttonController.clearVis();
     String winner = await buttonController.updateCoin(offset, offsetToStr(offset));
     if (winner == 'red') {
-      Get.snackbar('Red Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+      CenterSnackbar.show(context, 'Red Wins',);
+      // Get.snackbar('Red Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+
       resetGame();
     } else if (winner == 'blue') {
-      Get.snackbar('blue Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('blue Wins', 'message',snackPosition: SnackPosition.BOTTOM);
+      CenterSnackbar.show(context, 'Blue Wins');
+
       resetGame();
     }
+  }
+}
+
+
+class CenterSnackbar {
+  static void show(BuildContext context, String message) {
+    OverlayEntry overlayEntry;
+
+    overlayEntry = OverlayEntry(
+      builder: (BuildContext context) => Positioned(
+        top: MediaQuery.of(context).size.height / 2,
+        left: MediaQuery.of(context).size.width / 4,
+        child: Material(
+          color: Colors.transparent,
+          child: Card(
+            color: Color.fromARGB(229, 123, 123, 128),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 12,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  message,
+                  style: GoogleFonts.exo2(
+                    color: message != 'Red Wins' ? Color(0xFF0E3F7A) : Color(0xFFB61515),
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context)?.insert(overlayEntry);
+
+    // Wait for duration then remove the overlay
+    Future.delayed(Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
   }
 }
