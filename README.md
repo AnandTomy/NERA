@@ -1,6 +1,6 @@
 # nera2
 
-A new Flutter project.
+A small game where 2 palyers play against each other to make a line with 3 coins to win the game.
 
 ## Getting Started
 
